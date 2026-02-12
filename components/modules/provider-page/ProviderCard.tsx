@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 type ProviderProps = {
+    id: string;
     restaurantName: string;
     address: string;
 }
@@ -14,7 +15,7 @@ const ProviderCard = ({ provider }: { provider: ProviderProps }) => {
                 <CardDescription className="text-[#FF5322]">{provider.address}</CardDescription>
             </CardHeader>
             <CardFooter className="flex justify-end">
-                <Button className="bg-[#FF5322]">Details</Button>
+                <Button className="bg-[#FF5322] hover:bg-orange-500">Details</Button>
             </CardFooter>
         </Card>
     )
