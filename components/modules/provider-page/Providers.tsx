@@ -1,6 +1,6 @@
 import ProviderCard from "./ProviderCard"
 
-const Providers = () => {
+const Providers = ({limit}: {limit?: number}) => {
     const providers = [
     {
         id: "1",
@@ -23,9 +23,12 @@ const Providers = () => {
         address: "Mirpur Dhaka"
     }
  ]
+
+ const displayedProviders = limit ? providers.slice(0, 3) : providers;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {providers.splice(0, 3).map((provider) => (
+        {displayedProviders.map((provider) => (
         <ProviderCard key={provider.id} provider={provider} />
         ))}
     </div>

@@ -1,39 +1,46 @@
 import MealCard from "./MealCard"
 
-const Meals = () => {
+const Meals = ({limit}: {limit?: number}) => {
  const meals = [
     {
         id: "1",
         title: "Chicken Burger",
         description: "Delicious chicken burger",
         price: 150,
-        category: "Italian"
+        category: "Italian",
+        restaurantName: "Mirpur Restaurant"
     },
     {
         id: "2",
         title: "Chicken Burger",
         description: "Delicious chicken burger",
         price: 150,
-        category: "Italian"
+        category: "Italian",
+        restaurantName: "Mirpur Restaurant"
     },
     {
         id: "3",
         title: "Chicken Burger",
         description: "Delicious chicken burger",
         price: 150,
-        category: "Italian"
+        category: "Italian",
+        restaurantName: "Mirpur Restaurant"
     },
     {
         id: "4",
         title: "Chicken Burger",
         description: "Delicious chicken burger",
         price: 150,
-        category: "Italian"
+        category: "Italian",
+        restaurantName: "Mirpur Restaurant"
     },
  ]
+
+ const displayedMeals = limit ? meals.slice(0, limit) : meals;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {meals.splice(0, 3).map((meal) => (
+        {displayedMeals.map((meal) => (
         <MealCard key={meal.id} meal={meal} />
         ))}
     </div>

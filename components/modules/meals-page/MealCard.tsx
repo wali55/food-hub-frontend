@@ -7,6 +7,7 @@ type MealProps = {
     description: string;
     price: number | string;
     category: string;
+    restaurantName: string;
 }
 
 const MealCard = ({meal}: {meal: MealProps}) => {
@@ -15,6 +16,7 @@ const MealCard = ({meal}: {meal: MealProps}) => {
         <CardHeader>
             <CardTitle className="text-[#FF5322]">{meal.title}</CardTitle>
             <CardDescription className="text-[#FF5322]">{meal.description}</CardDescription>
+            <h3 className="text-[#FF5322] font-medium">{meal.restaurantName}</h3>
         </CardHeader>
         <CardContent className="flex justify-between">
             <h3 className="text-[#FF5322] font-medium text-lg">{meal.price}</h3>

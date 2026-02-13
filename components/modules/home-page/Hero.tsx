@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className={cn("overflow-hidden py-32")}>
+    <section className={cn("overflow-hidden py-32 mt-28")}>
       <div className="w-full">
         <div className="flex flex-col gap-5">
           <div className="relative flex flex-col gap-5">

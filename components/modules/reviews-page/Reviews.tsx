@@ -1,6 +1,6 @@
 import ReviewCard from "./ReviewCard"
 
-const Reviews = () => {
+const Reviews = ({limit}: {limit?: number}) => {
  const reviews = [
     {
         id: "1",
@@ -22,10 +22,13 @@ const Reviews = () => {
         user: "Md. Wali",
         content: "Delicious chicken burger"
     }
- ]
+ ];
+
+ const desplayedReviews = limit ? reviews.slice(0, 3) : reviews;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {reviews.splice(0, 3).map((review) => (
+        {desplayedReviews.map((review) => (
         <ReviewCard key={review.id} review={review} />
         ))}
     </div>

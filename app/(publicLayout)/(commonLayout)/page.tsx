@@ -17,7 +17,7 @@ const HomePage = () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <Meals />
+        <Meals limit={3} />
       </div>
 
       <div className="p-4 mt-48">
@@ -28,7 +28,7 @@ const HomePage = () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <Providers />
+        <Providers limit={3} />
       </div>
 
       <div className="p-4 my-48">
@@ -39,7 +39,7 @@ const HomePage = () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <Reviews />
+        <Reviews limit={3} />
       </div>
     </div>
   )
