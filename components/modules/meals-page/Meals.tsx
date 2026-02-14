@@ -10,6 +10,12 @@ export type Meal = {
             categoryId: string;
             createdAt: string;
             updatedAt: string;
+            category: {
+              title: string;
+            },
+            provider: {
+              restaurantName: string;
+            }
 }
 
 const Meals = ({limit, meals}: {limit?: number, meals: Meal[]}) => {
@@ -48,11 +54,11 @@ const Meals = ({limit, meals}: {limit?: number, meals: Meal[]}) => {
 //     },
 //  ]
 
- const displayedMeals = limit ? meals.slice(0, limit) : meals;
+ const displayedMeals = limit && meals ? meals.slice(0, limit) : meals;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {displayedMeals.map((meal) => (
+        {meals && displayedMeals.map((meal) => (
         <MealCard key={meal.id} meal={meal} />
         ))}
     </div>
