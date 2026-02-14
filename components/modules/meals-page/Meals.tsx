@@ -1,40 +1,52 @@
 import MealCard from "./MealCard"
 
-const Meals = ({limit}: {limit?: number}) => {
- const meals = [
-    {
-        id: "1",
-        title: "Chicken Burger",
-        description: "Delicious chicken burger",
-        price: 150,
-        category: "Italian",
-        restaurantName: "Mirpur Restaurant"
-    },
-    {
-        id: "2",
-        title: "Chicken Burger",
-        description: "Delicious chicken burger",
-        price: 150,
-        category: "Italian",
-        restaurantName: "Mirpur Restaurant"
-    },
-    {
-        id: "3",
-        title: "Chicken Burger",
-        description: "Delicious chicken burger",
-        price: 150,
-        category: "Italian",
-        restaurantName: "Mirpur Restaurant"
-    },
-    {
-        id: "4",
-        title: "Chicken Burger",
-        description: "Delicious chicken burger",
-        price: 150,
-        category: "Italian",
-        restaurantName: "Mirpur Restaurant"
-    },
- ]
+export type Meal = {
+    id: string;
+            title: string;
+            description: string;
+            price: string | number;
+            dietaryPref: string;
+            providerId: string;
+            categoryId: string;
+            createdAt: string;
+            updatedAt: string;
+}
+
+const Meals = ({limit, meals}: {limit?: number, meals: Meal[]}) => {
+//  const meals = [
+//     {
+//         id: "1",
+//         title: "Chicken Burger",
+//         description: "Delicious chicken burger",
+//         price: 150,
+//         category: "Italian",
+//         restaurantName: "Mirpur Restaurant"
+//     },
+//     {
+//         id: "2",
+//         title: "Chicken Burger",
+//         description: "Delicious chicken burger",
+//         price: 150,
+//         category: "Italian",
+//         restaurantName: "Mirpur Restaurant"
+//     },
+//     {
+//         id: "3",
+//         title: "Chicken Burger",
+//         description: "Delicious chicken burger",
+//         price: 150,
+//         category: "Italian",
+//         restaurantName: "Mirpur Restaurant"
+//     },
+//     {
+//         id: "4",
+//         title: "Chicken Burger",
+//         description: "Delicious chicken burger",
+//         price: 150,
+//         category: "Italian",
+//         restaurantName: "Mirpur Restaurant"
+//     },
+//  ]
 
  const displayedMeals = limit ? meals.slice(0, limit) : meals;
 
