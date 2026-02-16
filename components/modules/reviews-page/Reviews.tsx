@@ -1,34 +1,45 @@
-import ReviewCard from "./ReviewCard"
+import ReviewCard from "./ReviewCard";
 
-const Reviews = ({limit}: {limit?: number}) => {
- const reviews = [
-    {
-        id: "1",
-        user: "Md. Wali",
-        content: "Delicious chicken burger"
-    },
-    {
-        id: "2",
-        user: "Md. Wali",
-        content: "Delicious chicken burger"
-    },
-    {
-        id: "3",
-        user: "Md. Wali",
-        content: "Delicious chicken burger"
-    },
-    {
-        id: "4",
-        user: "Md. Wali",
-        content: "Delicious chicken burger"
-    }
- ];
+export type Review = {
+    id: string;
+            content: string;
+            userId: string;
+            createdAt: string;
+            updatedAt: string;
+            user: {
+                name: string;
+            }
+}
 
- const desplayedReviews = limit ? reviews.slice(0, 3) : reviews;
+const Reviews = ({limit, reviews}: {limit?: number, reviews: Review[]}) => {
+//  const reviews = [
+//     {
+//         id: "1",
+//         user: "Md. Wali",
+//         content: "Delicious chicken burger"
+//     },
+//     {
+//         id: "2",
+//         user: "Md. Wali",
+//         content: "Delicious chicken burger"
+//     },
+//     {
+//         id: "3",
+//         user: "Md. Wali",
+//         content: "Delicious chicken burger"
+//     },
+//     {
+//         id: "4",
+//         user: "Md. Wali",
+//         content: "Delicious chicken burger"
+//     }
+//  ];
+
+ const displayedReviews = limit && reviews?.length ?  reviews.slice(0, 3) : reviews;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {desplayedReviews.map((review) => (
+        {displayedReviews.map((review) => (
         <ReviewCard key={review.id} review={review} />
         ))}
     </div>

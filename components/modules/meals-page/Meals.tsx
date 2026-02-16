@@ -1,31 +1,18 @@
+"use client"
+
+import { useAppSelector } from "@/hooks";
 import MealCard from "./MealCard";
+import { Meal } from "@/components/initializer/MealsInitializer";
 
-export type Meal = {
-  id: string;
-  title: string;
-  description: string;
-  price: string | number;
-  dietaryPref: string;
-  providerId: string;
-  categoryId: string;
-  createdAt: string;
-  updatedAt: string;
-  category: {
-    title: string;
-  };
-  provider: {
-    restaurantName: string;
-  };
-};
-
-const Meals = ({ limit, meals }: { limit?: number; meals: Meal[] }) => {
+const Meals = ({ limit }: { limit?: number; }) => {
+  const {meals} = useAppSelector((state) => state.meal);
 
   const displayedMeals = limit && meals?.length ? meals.slice(0, limit) : meals;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {meals &&
-        displayedMeals.map((meal) => <MealCard key={meal.id} meal={meal} />)}
+        displayedMeals.map((meal) => <MealCard key={(meal as Meal).id} meal={meal} />)}
     </div>
   );
 };

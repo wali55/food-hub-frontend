@@ -1,3 +1,5 @@
+"use client"
+
 import Meals from "@/components/modules/meals-page/Meals"
 
 const MealsPage = () => {

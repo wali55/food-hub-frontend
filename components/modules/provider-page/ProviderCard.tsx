@@ -1,13 +1,8 @@
+import { Provider } from "@/components/initializer/ProvidersInitializer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-type ProviderProps = {
-    id: string;
-    restaurantName: string;
-    address: string;
-}
-
-const ProviderCard = ({ provider }: { provider: ProviderProps }) => {
+const ProviderCard = ({ provider }: { provider: Provider }) => {
     return (
         <Card>
             <CardHeader>

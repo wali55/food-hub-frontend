@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import MealReducer from "./features/meal/mealSlice";
+import ProviderReducer from "./features/provider/providerSlice";
 
 export const store = configureStore({
   reducer: {
-    meal: MealReducer
+    meal: MealReducer,
+    provider: ProviderReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });

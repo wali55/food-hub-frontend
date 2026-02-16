@@ -1,16 +1,11 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Review } from "./Reviews"
 
-type ReviewProps = {
-    id: string;
-    user: string;
-    content: string;
-}
-
-const ReviewCard = ({review}: {review: ReviewProps}) => {
+const ReviewCard = ({review}: {review: Review}) => {
   return (
     <Card>
         <CardHeader>
-            <CardTitle className="text-[#FF5322]">{review.user}</CardTitle>
+            <CardTitle className="text-[#FF5322]">{review.user.name}</CardTitle>
             <CardDescription className="text-[#FF5322]">{review.content}</CardDescription>
         </CardHeader>
     </Card>
