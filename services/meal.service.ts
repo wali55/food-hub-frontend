@@ -7,7 +7,6 @@ export const mealService = {
                 }
             });
         const result = await res.json();
-        console.log("meal service", result);
         if (!result.success) {
             return {data: null, error: result.message || "Could not fetch meals"}
         }
