@@ -12,9 +12,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const HomePage = async () => {
-  const {data: mealsData} = await getMeals();
-  const {data: providersData} = await getProviders();
-  const {data: reviewsData} = await getReviews();
+  const [mealsData, providersData, reviewsData] = await Promise.all([
+    getMeals(),
+    getProviders(),
+    getReviews()
+  ]);
 
   return (
     <div>
@@ -27,7 +29,7 @@ const HomePage = async () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <MealsInitializer meals={mealsData} />
+        {mealsData?.data && <MealsInitializer meals={mealsData?.data} />}
         <Meals limit={3} />
       </div>
 
@@ -39,7 +41,7 @@ const HomePage = async () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <ProvidersInitializer providers={providersData} />
+        {providersData?.data && <ProvidersInitializer providers={providersData?.data} />}
         <Providers limit={3} />
       </div>
 
@@ -51,7 +53,7 @@ const HomePage = async () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <ReviewsInitializer reviews={reviewsData} />
+        {reviewsData?.data && <ReviewsInitializer reviews={reviewsData?.data} />}
         <Reviews limit={3} />
       </div>
     </div>

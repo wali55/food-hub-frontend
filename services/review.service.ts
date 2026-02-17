@@ -4,7 +4,8 @@ export const reviewService = {
             const res = await fetch(`${process.env.BACKEND_URL}/reviews`, {
                 next: {
                     tags: ["reviews"]
-                }
+                },
+                cache: "no-store"
             });
         const result = await res.json();
         if (!result.success) {

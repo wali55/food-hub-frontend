@@ -4,7 +4,8 @@ export const providerService = {
             const res = await fetch(`${process.env.BACKEND_URL}/provider-profile`, {
                 next: {
                     tags: ["providers"]
-                }
+                },
+                cache: "no-store"
             });
         const result = await res.json();
         if (!result.success) {

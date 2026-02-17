@@ -21,7 +21,7 @@ const ProvidersInitializer = ({providers}: {providers: Provider[]}) => {
      }, [providers]);
     
   return (
-    <div>ProvidersInitializer</div>
+    <div></div>
   )
 }
 

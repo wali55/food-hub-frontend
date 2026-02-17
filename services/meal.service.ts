@@ -4,7 +4,8 @@ export const mealService = {
             const res = await fetch(`${process.env.BACKEND_URL}/meals`, {
                 next: {
                     tags: ["meals"]
-                }
+                },
+                cache: "no-store"
             });
         const result = await res.json();
         if (!result.success) {
