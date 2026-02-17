@@ -12,7 +12,7 @@ const Reviews = ({limit}: {limit?: number}) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {displayedReviews.map((review) => (
+        {reviews?.length && displayedReviews?.map((review) => (
         <ReviewCard key={(review as Review).id} review={review} />
         ))}
     </div>

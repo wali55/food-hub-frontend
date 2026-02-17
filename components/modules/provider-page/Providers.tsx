@@ -12,7 +12,7 @@ const Providers = ({ limit}: { limit?: number}) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {displayedProviders.map((provider) => (
+      {providers?.length && displayedProviders?.map((provider) => (
         <ProviderCard key={(provider as Provider).id} provider={provider} />
       ))}
     </div>
