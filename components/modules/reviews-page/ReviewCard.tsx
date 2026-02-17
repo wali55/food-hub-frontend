@@ -1,5 +1,5 @@
+import { Review } from "@/components/initializer/ReviewsInitializer"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Review } from "./Reviews"
 
 const ReviewCard = ({review}: {review: Review}) => {
   return (

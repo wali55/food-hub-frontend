@@ -3,6 +3,7 @@ import { getProviders } from "@/actions/provider.action";
 import { getReviews } from "@/actions/review.action";
 import MealsInitializer from "@/components/initializer/MealsInitializer";
 import ProvidersInitializer from "@/components/initializer/ProvidersInitializer";
+import ReviewsInitializer from "@/components/initializer/ReviewsInitializer";
 import { Hero } from "@/components/modules/home-page/Hero";
 import Meals from "@/components/modules/meals-page/Meals";
 import Providers from "@/components/modules/provider-page/Providers";
@@ -50,7 +51,8 @@ const HomePage = async () => {
             <Button className="bg-[#FF5322] hover:bg-orange-500">View all</Button>
           </Link>
         </div>
-        <Reviews limit={3} reviews={reviewsData} />
+        <ReviewsInitializer reviews={reviewsData} />
+        <Reviews limit={3} />
       </div>
     </div>
   )

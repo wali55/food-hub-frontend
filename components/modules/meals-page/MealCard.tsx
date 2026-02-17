@@ -1,6 +1,6 @@
+import { Meal } from "@/components/initializer/MealsInitializer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Meal } from "./Meals";
 
 const MealCard = ({meal}: {meal: Meal}) => {
   return (
@@ -11,7 +11,7 @@ const MealCard = ({meal}: {meal: Meal}) => {
             <h3 className="text-[#FF5322] font-medium">{meal.provider.restaurantName}</h3>
         </CardHeader>
         <CardContent className="flex justify-between">
-            <h3 className="text-[#FF5322] font-medium text-lg">{meal.price}</h3>
+            <h3 className="text-[#FF5322] font-medium text-lg">৳{meal.price}</h3>
             <h3 className="text-[#FF5322] font-medium text-lg">{meal.category.title}</h3>
         </CardContent>
         <CardFooter className="flex justify-end">
