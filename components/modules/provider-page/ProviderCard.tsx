@@ -10,7 +10,7 @@ const ProviderCard = ({ provider }: { provider: Provider }) => {
                 <CardDescription className="text-[#FF5322]">{provider.address}</CardDescription>
             </CardHeader>
             <CardFooter className="flex justify-end">
-                <Button className="bg-[#FF5322] hover:bg-orange-500">Details</Button>
+                <Button className="text-[#FF5322] border border-[#FF5322] bg-white hover:bg-orange-500 hover:text-white">Details</Button>
             </CardFooter>
         </Card>
     )
