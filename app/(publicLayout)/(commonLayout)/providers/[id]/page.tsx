@@ -8,6 +8,7 @@ const ProviderDetailsPage = async ({params}: {params: Promise<{id: string}>}) =>
   return (
     <div>
       <ProviderDetailsInitializer provider={providerData} />
+      <h1 className="text-3xl text-[#FF5322] font-bold m-4">Provider Details</h1>
       <ProviderDetails />
     </div>
   );

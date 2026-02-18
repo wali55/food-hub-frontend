@@ -8,6 +8,7 @@ const MealDetailsPage = async ({params}: {params: Promise<{id: string}>}) => {
   return (
     <div>
       <MealItemDetailsInitializer meal={mealData} />
+      <h1 className="text-3xl text-[#FF5322] font-bold m-4">Meal Details</h1>
       <MealItemDetails />
     </div>
   )

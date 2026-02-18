@@ -13,7 +13,7 @@ const ProviderDetailsMeals = ({meal}: {meal: ProviderMeal}) => {
         </CardContent>
         <CardContent className="flex justify-between">
             <h3 className="text-[#FF5322] font-medium text-lg">৳{meal.price}</h3>
-            <h3 className="text-[#FF5322] text-lg"> <span className="font-medium">Dietary Pref:</span> {meal.category.title}</h3>
+            <h3 className="text-[#FF5322] text-lg"> <span className="font-medium">Category:</span> {meal.category.title}</h3>
         </CardContent>
     </Card>
   )
