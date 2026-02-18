@@ -6,3 +6,8 @@ export const getProviders = async () => {
     const result = await providerService.getProviders();
     return result;
 }
+
+export const getProviderDetails = async (id: string) => {
+    const result = await providerService.getProviderDetails(id);
+    return result;
+}
