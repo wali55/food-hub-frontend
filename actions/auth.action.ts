@@ -34,3 +34,8 @@ export const logout = async () => {
     }
     return result;
 }
+
+export const getCurrentUser = async () => {
+    const result = await authService.getCurrentUser();
+    return result;
+}
