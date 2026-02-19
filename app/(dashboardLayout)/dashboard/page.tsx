@@ -1,7 +1,7 @@
+import { redirect } from "next/navigation";
+
 const DashboardPage = () => {
-  return (
-    <div>DashboardPage</div>
-  )
+  return redirect("/dashboard/cart");
 }
 
 export default DashboardPage
