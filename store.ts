@@ -3,13 +3,15 @@ import mealReducer from "./features/meal/mealSlice";
 import providerReducer from "./features/provider/providerSlice";
 import reviewReducer from "./features/review/reviewSlice";
 import authReducer from "./features/auth/authSlice";
+import cartReducer from "./features/cart/cartSlice";
 
 export const store = configureStore({
   reducer: {
     meal: mealReducer,
     provider: providerReducer,
     review: reviewReducer,
-    auth: authReducer
+    auth: authReducer,
+    cart: cartReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });
