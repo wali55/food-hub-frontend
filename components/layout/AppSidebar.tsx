@@ -1,10 +1,12 @@
 "use client"
 
 import * as React from "react"
+import {Button} from "@/components/ui/button";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -13,8 +15,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { useAppSelector } from "@/hooks"
+import { useAppDispatch, useAppSelector } from "@/hooks"
 import Link from "next/link"
+import { logout } from "@/actions/auth.action";
+import { toast } from "sonner";
+import { setLogout } from "@/features/auth/authSlice";
+import { useRouter } from "next/navigation";
 
 const data = {
   customerNav: [
@@ -88,9 +94,23 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const {user} = useAppSelector((state) => state.auth);
 
   const navItems = user?.role === "ADMIN" ? data.adminNav : user?.role === "PROVIDER" ? data.providerNav : data.customerNav;
+
+  const handleLogout = async () => {
+    const toastId = toast.loading("Logging out...");
+    const result = await logout();
+    if (!result.data) {
+      toast.error("Count not logout", { id: toastId });
+      return;
+    }
+    dispatch(setLogout());
+    toast.success("Logged out successfully", { id: toastId });
+    router.push("/auth/login");
+  }
 
   return (
     <Sidebar {...props} className="text-[#FF5322]">
@@ -114,6 +134,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ))}
       </SidebarContent>
       <SidebarRail />
+      <SidebarFooter>
+        <Button variant="destructive" onClick={handleLogout}>Logout</Button>
+      </SidebarFooter>
     </Sidebar>
   )
 }

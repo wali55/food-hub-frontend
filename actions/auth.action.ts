@@ -25,3 +25,12 @@ export const login = async (loginData: LoginData) => {
 
     return result;
 }
+
+export const logout = async () => {
+    const result = await authService.logout();
+    if (result.data) {
+        const cookieStore = await cookies(); 
+        cookieStore.delete("token");
+    }
+    return result;
+}

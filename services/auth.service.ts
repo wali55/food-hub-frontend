@@ -56,4 +56,25 @@ export const authService = {
       return { data: null, error: error.message || "Could not login" };
     }
   },
+  logout: async () => {
+    try {
+      const res = await fetch(`${process.env.BACKEND_URL}/auth/logout`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not logout",
+        };
+      }
+      return { data: result.success, error: null };
+    } catch (error: any) {
+      return { data: null, error: error.message || "Could not logout" };
+    }
+  },
 };
