@@ -69,9 +69,15 @@ const cartSlice = createSlice({
     },
     setDeliveryAddress: (state, action) => {
       state.deliveryAddress = action.payload;
+    },
+    clearCart: (state) => {
+      state.count = 0;
+      state.total = 0;
+      state.mealItems = [];
+      state.deliveryAddress = "";
     }
   },
 });
 
-export const { addCart, increment, decrement, removeCart, setDeliveryAddress } = cartSlice.actions;
+export const { addCart, increment, decrement, removeCart, setDeliveryAddress, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
