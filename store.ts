@@ -5,6 +5,7 @@ import reviewReducer from "./features/review/reviewSlice";
 import authReducer from "./features/auth/authSlice";
 import cartReducer from "./features/cart/cartSlice";
 import orderReducer from "./features/order/orderSlice";
+import customerProfileReducer from "./features/customerProfile/customerProfileSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     review: reviewReducer,
     auth: authReducer,
     cart: cartReducer,
-    order: orderReducer
+    order: orderReducer,
+    customerProfile: customerProfileReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });
