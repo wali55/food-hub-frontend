@@ -83,6 +83,9 @@ export const authService = {
     try {
       const cookieStore = await cookies();
       const res = await fetch(`${process.env.BACKEND_URL}/auth/me`, {
+        next: {
+          tags: ["current-user"]
+        },
         headers: {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
@@ -100,6 +103,33 @@ export const authService = {
       return {
         data: null,
         error: error.message || "Could not fetch current user",
+      };
+    }
+  },
+  updateUser: async (user: {name?: string; phone?: string; address?: string}) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/auth/me`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        body: JSON.stringify(user)
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not update user",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not update user",
       };
     }
   },

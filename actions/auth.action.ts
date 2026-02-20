@@ -1,6 +1,7 @@
 "use server"
 
 import { authService, LoginData, RegisterData } from "@/services/auth.service";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const register = async (registerData: RegisterData) => {
@@ -37,5 +38,11 @@ export const logout = async () => {
 
 export const getCurrentUser = async () => {
     const result = await authService.getCurrentUser();
+    return result;
+}
+
+export const updateUser = async (user: {name?: string; phone?: string; address?: string}) => {
+    const result = await authService.updateUser(user);
+    revalidateTag("current-user", "max");
     return result;
 }

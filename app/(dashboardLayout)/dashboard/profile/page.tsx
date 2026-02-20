@@ -1,6 +1,7 @@
 import { getCurrentUser } from "@/actions/auth.action";
 import CustomerProfileInitializer from "@/components/initializer/CustomerProfileInitializer";
 import CustomerProfile from "@/components/modules/customer-page/CustomerProfile";
+import EditCustomerProfileDialog from "@/components/modules/customer-page/EditCustomerProfileDialog";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -17,6 +18,9 @@ const ProfilePage = async () => {
       <CustomerProfileInitializer profile={profileData} />
       <div className="my-4 max-w-2xl">
         <CustomerProfile />
+        <div className="my-4">
+        <EditCustomerProfileDialog />
+        </div>
       </div>
     </div>
   );

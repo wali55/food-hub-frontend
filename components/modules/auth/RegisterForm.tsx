@@ -52,7 +52,6 @@ export function RegisterForm() {
       onSubmit: registerSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("$$$registerData", value)
       const toastId = toast.loading("Creating a new account");
       try {
         const { data, error } = await register(value);
