@@ -4,7 +4,6 @@ import { getCurrentUser } from "./actions/auth.action";
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const { data: user } = await getCurrentUser();
-  console.log("***user", user)
   let isAuthenticated = false;
   let isAdmin = false;
   let isProvider = false;

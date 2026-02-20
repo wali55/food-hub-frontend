@@ -36,4 +36,32 @@ export const orderService = {
       };
     }
   },
+  getCustomerOrders: async () => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/orders/customer`, {
+        next: {
+          tags: ["customer-orders"]
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        }, 
+        credentials: "include",
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not fetch customer orders",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not fetch customer orders",
+      };
+    }
+  },
 };
