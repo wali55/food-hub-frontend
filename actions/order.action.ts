@@ -13,3 +13,8 @@ export const getCustomerOrders = async () => {
     const result = await orderService.getCustomerOrders();
     return result;
 }
+
+export const getOrderById = async (id: string) => {
+    const result = await orderService.getOrderById(id);
+    return result;
+}

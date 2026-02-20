@@ -7,7 +7,7 @@ const initialUser = {
   phone: "",
   isActive: false,
   address: "",
-  role: "CUSTOMER",
+  role: "",
   createdAt: "",
   updatedAt: "",
 };

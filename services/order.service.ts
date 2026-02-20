@@ -64,4 +64,29 @@ export const orderService = {
       };
     }
   },
+  getOrderById: async (id: string) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/orders/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        }, 
+        credentials: "include",
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not fetch order",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not fetch order",
+      };
+    }
+  },
 };

@@ -2,6 +2,7 @@
 
 import { CustomerOrder } from "@/components/initializer/CustomerOrdersInitializer";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -11,8 +12,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useAppSelector } from "@/hooks";
+import { useRouter } from "next/navigation";
 
 const CustomerOrders = () => {
+  const router = useRouter();
   const { orders } = useAppSelector((state) => state.order);
   return (
     <Table>
@@ -22,6 +25,7 @@ const CustomerOrders = () => {
           <TableHead className="text-[#FF5322]">Status</TableHead>
           <TableHead className="text-[#FF5322]">Delivery Type</TableHead>
           <TableHead className="text-[#FF5322]">Total Price</TableHead>
+          <TableHead className="text-[#FF5322]">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -38,6 +42,9 @@ const CustomerOrders = () => {
               </Badge>
               <TableCell>{order.deliveryType}</TableCell>
               <TableCell>৳{order.totalPrice}</TableCell>
+              <TableCell>
+                <Button className="bg-[#FF5322] cursor-pointer" size="xs" onClick={() => router.push(`/dashboard/orders/${order.id}`)}>Details</Button>
+              </TableCell>
             </TableRow>
           ))}
       </TableBody>
