@@ -6,6 +6,7 @@ import { revalidateTag } from "next/cache";
 export const createOrder = async (orderData: OrderData) => {
     const result = await orderService.createOrder(orderData);
     revalidateTag("customer-orders", "max");
+    revalidateTag("provider-stats", "max");
     return result;
 }
 

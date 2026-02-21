@@ -10,6 +10,12 @@ const initialState = {
         createdAt: "",
         updatedAt: "",
         meals: []
+    },
+    providerStats: {
+        totalMeals: 0,
+        totalOrders: 0,
+        placedOrders: 0,
+        deliveredOrders: 0
     }
 }
 
@@ -22,9 +28,12 @@ const providerSlice = createSlice({
         },
         setSelectedProvider: (state, action) => {
             state.selectedProvider = action.payload;
+        },
+        setProviderStats: (state, action) => {
+            state.providerStats = action.payload;
         }
     }
 })
 
-export const {setProviders, setSelectedProvider} = providerSlice.actions;
+export const {setProviders, setSelectedProvider, setProviderStats} = providerSlice.actions;
 export default providerSlice.reducer;
