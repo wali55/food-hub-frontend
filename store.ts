@@ -6,6 +6,7 @@ import authReducer from "./features/auth/authSlice";
 import cartReducer from "./features/cart/cartSlice";
 import orderReducer from "./features/order/orderSlice";
 import customerProfileReducer from "./features/customerProfile/customerProfileSlice";
+import categoryReducer from "./features/category/categorySlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     auth: authReducer,
     cart: cartReducer,
     order: orderReducer,
-    customerProfile: customerProfileReducer
+    customerProfile: customerProfileReducer,
+    category: categoryReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });

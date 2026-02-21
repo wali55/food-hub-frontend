@@ -1,6 +1,7 @@
 "use server"
 
-import { mealService } from "@/services/meal.service"
+import { CreateMeal, mealService } from "@/services/meal.service"
+import { revalidateTag } from "next/cache";
 
 export const getMeals = async () => {
     const result = await mealService.getMeals();
@@ -9,5 +10,16 @@ export const getMeals = async () => {
 
 export const getMealItemById = async (id: string) => {
     const result = await mealService.getMealItemById(id);
+    return result;
+}
+
+export const getProviderMeals = async () => {
+    const result = await mealService.getProviderMeals();
+    return result;
+}
+
+export const createMeal = async (meal: CreateMeal) => {
+    const result = await mealService.createMeal(meal);
+    revalidateTag("provider-meals", "max");
     return result;
 }

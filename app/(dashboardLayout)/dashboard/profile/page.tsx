@@ -19,7 +19,7 @@ const ProfilePage = async () => {
       <div className="my-4 max-w-2xl">
         <CustomerProfile />
         <div className="my-4">
-        <EditCustomerProfileDialog />
+          <EditCustomerProfileDialog />
         </div>
       </div>
     </div>

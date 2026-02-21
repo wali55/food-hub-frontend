@@ -1,3 +1,13 @@
+import { cookies } from "next/headers";
+
+export type CreateMeal = {
+  title: string;
+  description: string;
+  price: string | number;
+  dietaryPref: string;
+  categoryId: string;
+};
+
 export const mealService = {
   getMeals: async () => {
     try {
@@ -30,6 +40,61 @@ export const mealService = {
       return {
         data: null,
         error: error.message || "Could not fetch meal item",
+      };
+    }
+  },
+  getProviderMeals: async () => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/meals/provider`, {
+        next: {
+          tags: ["provider-meals"],
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not fetch provider meals",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not fetch provider meals",
+      };
+    }
+  },
+  createMeal: async (meal: CreateMeal) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/meals`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        body: JSON.stringify(meal),
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not create meal",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not create meal",
       };
     }
   },

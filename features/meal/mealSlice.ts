@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   meals: [],
+  providerMeals: [],
   selectedMeal: {
     id: "",
     title: "",
@@ -31,8 +32,11 @@ const mealSlice = createSlice({
     setSelectedMeal: (state, action) => {
       state.selectedMeal = action.payload;
     },
+    setProviderMeals: (state, action) => {
+      state.providerMeals = action.payload;
+    }
   },
 });
 
-export const { setMeals, setSelectedMeal } = mealSlice.actions;
+export const { setMeals, setSelectedMeal, setProviderMeals } = mealSlice.actions;
 export default mealSlice.reducer;
