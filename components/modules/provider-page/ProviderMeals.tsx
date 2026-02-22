@@ -1,7 +1,6 @@
 "use client";
 
 import { ProviderMeal } from "@/components/initializer/ProviderMealsInitializer";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useAppSelector } from "@/hooks";
 import UpdateMealDialog from "../meals-page/UpdateMealDialog";
+import DeleteMealAlert from "../meals-page/DeleteMealAlert";
 
 const ProviderMeals = () => {
   const { providerMeals } = useAppSelector((state) => state.meal);
@@ -37,9 +37,7 @@ const ProviderMeals = () => {
               <TableCell>৳{meal.price}</TableCell>
               <TableCell className="flex gap-2">
                 <UpdateMealDialog mealId={meal.id} />
-                <Button className="cursor-pointer" variant="destructive" size="xs">
-                  Delete
-                </Button>
+                <DeleteMealAlert mealId={meal.id} />
               </TableCell>
             </TableRow>
           ))}

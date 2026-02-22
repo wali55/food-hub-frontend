@@ -29,3 +29,9 @@ export const updateMeal = async (meal: UpdateMeal, mealId: string) => {
     revalidateTag("provider-meals", "max");
     return result;
 }
+
+export const deleteMeal = async (mealId: string) => {
+    const result = await mealService.deleteMeal(mealId);
+    revalidateTag("provider-meals", "max");
+    return result;
+}

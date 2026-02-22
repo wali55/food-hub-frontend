@@ -84,12 +84,11 @@ const UpdateMealDialog = ({mealId}: {mealId: string}) => {
       onSubmit: updateMealSchema,
     },
     onSubmit: async ({ value }) => {
-        console.log("***updating meal")
       const toastId = toast.loading("Updating meal...");
       try {
         const { error } = await updateMeal(value, mealId);
         if (error) {
-          toast.error(error?.message || "Failed to update meal", {
+          toast.error(error || "Failed to update meal", {
             id: toastId,
           });
           return;
@@ -97,7 +96,7 @@ const UpdateMealDialog = ({mealId}: {mealId: string}) => {
         setOpen(false);
         toast.success("Meal updated successfully.", { id: toastId });
       } catch (error: any) {
-        toast.error(error?.message || "Failed to update meal", {
+        toast.error(error || "Failed to update meal", {
           id: toastId,
         });
       }
