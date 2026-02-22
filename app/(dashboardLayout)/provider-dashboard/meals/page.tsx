@@ -4,7 +4,6 @@ import CategoriesInitializer from "@/components/initializer/CategoriesInitialize
 import ProviderMealsInitializer from "@/components/initializer/ProviderMealsInitializer";
 import CreateMealDialog from "@/components/modules/meals-page/CreateMealDialog";
 import ProviderMeals from "@/components/modules/provider-page/ProviderMeals";
-import { Button } from "@/components/ui/button";
 
 const MealsPage = async () => {
   const { data: providerMeals } = await getProviderMeals();

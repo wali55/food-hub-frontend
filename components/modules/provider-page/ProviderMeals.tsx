@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useAppSelector } from "@/hooks";
+import UpdateMealDialog from "../meals-page/UpdateMealDialog";
 
 const ProviderMeals = () => {
   const { providerMeals } = useAppSelector((state) => state.meal);
@@ -35,9 +36,7 @@ const ProviderMeals = () => {
               <TableCell>{meal.category.title}</TableCell>
               <TableCell>৳{meal.price}</TableCell>
               <TableCell className="flex gap-2">
-                <Button className="bg-[#FF5322] hover:bg-orange-500 cursor-pointer" size="xs">
-                  Edit
-                </Button>
+                <UpdateMealDialog mealId={meal.id} />
                 <Button className="cursor-pointer" variant="destructive" size="xs">
                   Delete
                 </Button>

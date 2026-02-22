@@ -1,7 +1,8 @@
 "use client";
 
-import { createMeal } from "@/actions/meal.action";
+import { updateMeal } from "@/actions/meal.action";
 import { Category } from "@/components/initializer/CategoriesInitializer";
+import { ProviderMeal } from "@/components/initializer/ProviderMealsInitializer";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -30,48 +31,73 @@ import {
 } from "@/components/ui/select";
 import { useAppSelector } from "@/hooks";
 import { useForm } from "@tanstack/react-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
 
-const CreateMealDialog = () => {
+const UpdateMealDialog = ({mealId}: {mealId: string}) => {
+  const initialMeal = {
+    id: "",
+    title: "",
+    description: "",
+    price: 0,
+    dietaryPref: "",
+    providerId: "",
+    categoryId: "",
+    createdAt: "",
+    updatedAt: "",
+    category: {
+      title: "",
+    },
+  };
+  const [selectedMeal, setSelectedMeal] = useState(initialMeal);
   const [open, setOpen] = useState(false);
   const { categories } = useAppSelector((state) => state.category);
+  const { providerMeals } = useAppSelector((state) => state.meal);
 
-  const createMealSchema = z.object({
-    title: z.string().min(1, "Title is required"),
-    description: z.string().min(1, "Description is required"),
-    price: z.number().min(1, "Price is required"),
-    dietaryPref: z.string().min(1, "Dietary Preference is required"),
-    categoryId: z.string().min(1, "Category is required"),
+  useEffect(() => {
+    const meal = providerMeals.find(
+      (providerMeal) => (providerMeal as ProviderMeal).id === mealId,
+    );
+    if (meal) {
+      setSelectedMeal(meal);
+    }
+  }, [providerMeals, mealId]);
+
+  const updateMealSchema = z.object({
+    title: z.string(),
+    description: z.string(),
+    price: z.number(),
+    dietaryPref: z.string(),
+    categoryId: z.string(),
   });
 
   const form = useForm({
     defaultValues: {
-      title: "",
-      description: "",
-      price: 0,
-      dietaryPref: "",
-      categoryId: "",
+      title: selectedMeal?.title || "",
+      description: selectedMeal?.description || "",
+      price: Number(selectedMeal?.price) || 0,
+      dietaryPref: selectedMeal?.dietaryPref || "",
+      categoryId: selectedMeal?.categoryId || "",
     },
     validators: {
-      onSubmit: createMealSchema,
+      onSubmit: updateMealSchema,
     },
     onSubmit: async ({ value }) => {
-      const toastId = toast.loading("Creating meal...");
+        console.log("***updating meal")
+      const toastId = toast.loading("Updating meal...");
       try {
-        const { error } = await createMeal(value);
+        const { error } = await updateMeal(value, mealId);
         if (error) {
-          toast.error(error?.message || "Failed to create meal", {
+          toast.error(error?.message || "Failed to update meal", {
             id: toastId,
           });
           return;
         }
-        form.reset();
         setOpen(false);
-        toast.success("Meal created successfully.", { id: toastId });
+        toast.success("Meal updated successfully.", { id: toastId });
       } catch (error: any) {
-        toast.error(error?.message || "Failed to create meal", {
+        toast.error(error?.message || "Failed to update meal", {
           id: toastId,
         });
       }
@@ -86,12 +112,12 @@ const CreateMealDialog = () => {
           className="bg-[#FF5322] hover:bg-orange-500 cursor-pointer"
           size="xs"
         >
-          Create
+          Edit
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <form
-          id="create-meal-form"
+          id="update-meal-form"
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -99,9 +125,9 @@ const CreateMealDialog = () => {
           }}
         >
           <DialogHeader>
-            <DialogTitle>Create Meal</DialogTitle>
+            <DialogTitle>Edit Meal</DialogTitle>
             <DialogDescription>
-              Create a meal for your restaurant.
+              Edit a meal 
             </DialogDescription>
           </DialogHeader>
           <FieldGroup>
@@ -258,7 +284,7 @@ const CreateMealDialog = () => {
             </DialogClose>
             <Button
               type="submit"
-              form="create-meal-form"
+              form="update-meal-form"
               className="bg-[#FF5322] hover:bg-orange-500 cursor-pointer"
             >
               Save changes
@@ -270,4 +296,4 @@ const CreateMealDialog = () => {
   );
 };
 
-export default CreateMealDialog;
+export default UpdateMealDialog;

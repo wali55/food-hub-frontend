@@ -8,6 +8,14 @@ export type CreateMeal = {
   categoryId: string;
 };
 
+export type UpdateMeal = {
+  title?: string;
+  description?: string;
+  price?: string | number;
+  dietaryPref?: string;
+  categoryId?: string;
+};
+
 export const mealService = {
   getMeals: async () => {
     try {
@@ -95,6 +103,33 @@ export const mealService = {
       return {
         data: null,
         error: error.message || "Could not create meal",
+      };
+    }
+  },
+  updateMeal: async (meal: UpdateMeal, mealId: string) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/meals/${mealId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        body: JSON.stringify(meal),
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not update meal",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not update meal",
       };
     }
   },
