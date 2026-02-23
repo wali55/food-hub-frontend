@@ -89,4 +89,59 @@ export const orderService = {
       };
     }
   },
+  getProviderOrders: async () => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/orders/provider`, {
+        next: {
+          tags: ["provider-orders"]
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        }, 
+        credentials: "include",
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not fetch provider orders",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not fetch provider orders",
+      };
+    }
+  },
+  updateOrderStatus: async (order: {status: string},orderId: string) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${process.env.BACKEND_URL}/orders/${orderId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        }, 
+        credentials: "include",
+        body: JSON.stringify(order)
+      });
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not update order status",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not update order status",
+      };
+    }
+  }
 };
