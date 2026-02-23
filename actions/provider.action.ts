@@ -16,3 +16,8 @@ export const getProviderStats = async () => {
     const result = await providerService.getProviderStats();
     return result;
 }
+
+export const getCurrentProvider = async () => {
+    const result = await providerService.getCurrentProvider();
+    return result;
+}

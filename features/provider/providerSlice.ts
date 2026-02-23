@@ -11,6 +11,19 @@ const initialState = {
         updatedAt: "",
         meals: []
     },
+    providerProfile: {
+        id: "",
+        restaurantName: "",
+        address: "",
+        userId: "",
+        createdAt: "",
+        updatedAt: "",
+        user: {
+            name: "",
+            email: "",
+            phone: ""
+        }
+    },
     providerStats: {
         totalMeals: 0,
         totalOrders: 0,
@@ -31,9 +44,12 @@ const providerSlice = createSlice({
         },
         setProviderStats: (state, action) => {
             state.providerStats = action.payload;
+        },
+        setProviderProfile: (state, action) => {
+            state.providerProfile = action.payload;
         }
     }
 })
 
-export const {setProviders, setSelectedProvider, setProviderStats} = providerSlice.actions;
+export const {setProviders, setSelectedProvider, setProviderStats, setProviderProfile} = providerSlice.actions;
 export default providerSlice.reducer;
