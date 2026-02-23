@@ -1,6 +1,5 @@
 "use server"
 
-import { Category } from "@/components/initializer/CategoriesInitializer";
 import { categoryService } from "@/services/category.service";
 import { revalidateTag } from "next/cache";
 
