@@ -4,7 +4,7 @@ import { createOrder } from "@/actions/order.action";
 import { Button } from "@/components/ui/button";
 import { FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
-import { clearCart, setDeliveryAddress } from "@/features/cart/cartSlice";
+import { clearCart, setDeliveryAddress, setReviewDialogOpen } from "@/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -37,9 +37,9 @@ const Checkout = () => {
       toast.error(error?.message || "Error occur when creating an order!", { id: toastId });
       return;
     }
-    //todo dispatch action to update customer order list in the
     dispatch(clearCart());
-    router.push("/dashboard/orders");
+    router.push("/dashboard/review");
+    dispatch(setReviewDialogOpen(true));
     toast.success("Order created successfully.", { id: toastId });
   };
 

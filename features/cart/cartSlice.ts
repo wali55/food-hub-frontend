@@ -13,6 +13,7 @@ export type Cart = {
   total: number;
   mealItems: CartMeal[];
   deliveryAddress: string;
+  reviewDialogOpen: boolean;
 };
 
 const initialState: Cart = {
@@ -20,6 +21,7 @@ const initialState: Cart = {
   total: 0,
   mealItems: [],
   deliveryAddress: "",
+  reviewDialogOpen: false
 };
 
 const cartSlice = createSlice({
@@ -75,9 +77,12 @@ const cartSlice = createSlice({
       state.total = 0;
       state.mealItems = [];
       state.deliveryAddress = "";
+    },
+    setReviewDialogOpen: (state, action) => {
+      state.reviewDialogOpen = action.payload;
     }
   },
 });
 
-export const { addCart, increment, decrement, removeCart, setDeliveryAddress, clearCart } = cartSlice.actions;
+export const { addCart, increment, decrement, removeCart, setDeliveryAddress, clearCart, setReviewDialogOpen } = cartSlice.actions;
 export default cartSlice.reducer;
