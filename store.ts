@@ -7,6 +7,7 @@ import cartReducer from "./features/cart/cartSlice";
 import orderReducer from "./features/order/orderSlice";
 import customerProfileReducer from "./features/customerProfile/customerProfileSlice";
 import categoryReducer from "./features/category/categorySlice";
+import adminReducer from "./features/admin/adminSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     cart: cartReducer,
     order: orderReducer,
     customerProfile: customerProfileReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    admin: adminReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });
