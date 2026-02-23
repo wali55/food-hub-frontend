@@ -1,5 +1,10 @@
 import { cookies } from "next/headers";
 
+export type CreateProviderProfile = {
+  restaurantName: string;
+  address: string;
+};
+
 export const providerService = {
   getProviders: async () => {
     try {
@@ -78,16 +83,17 @@ export const providerService = {
     try {
       const cookieStore = await cookies();
       const res = await fetch(
-        `${process.env.BACKEND_URL}/provider-profile/me`, {
+        `${process.env.BACKEND_URL}/provider-profile/me`,
+        {
           next: {
-            tags: ["current-provider"]
+            tags: ["current-provider"],
           },
           headers: {
             "Content-Type": "application/json",
             Cookie: cookieStore.toString(),
           },
           credentials: "include",
-        }
+        },
       );
       const result = await res.json();
       if (!result.success) {
@@ -101,6 +107,36 @@ export const providerService = {
       return {
         data: null,
         error: error.message || "Could not fetch provider",
+      };
+    }
+  },
+  createProviderProfile: async (profile: CreateProviderProfile) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(
+        `${process.env.BACKEND_URL}/provider-profile`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Cookie: cookieStore.toString(),
+          },
+          credentials: "include",
+          body: JSON.stringify(profile)
+        },
+      );
+      const result = await res.json();
+      if (!result.success) {
+        return {
+          data: null,
+          error: result.message || "Could not create provider profile",
+        };
+      }
+      return { data: result.data, error: null };
+    } catch (error: any) {
+      return {
+        data: null,
+        error: error.message || "Could not create provider profile",
       };
     }
   },

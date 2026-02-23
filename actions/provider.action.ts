@@ -1,6 +1,7 @@
 "use server"
 
-import { providerService } from "@/services/provider.service";
+import { CreateProviderProfile, providerService } from "@/services/provider.service";
+import { revalidateTag } from "next/cache";
 
 export const getProviders = async () => {
     const result = await providerService.getProviders();
@@ -19,5 +20,11 @@ export const getProviderStats = async () => {
 
 export const getCurrentProvider = async () => {
     const result = await providerService.getCurrentProvider();
+    return result;
+}
+
+export const createProviderProfile = async (profile: CreateProviderProfile) => {
+    const result = await providerService.createProviderProfile(profile);
+    revalidateTag("current-provider", "max");
     return result;
 }
