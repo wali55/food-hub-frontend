@@ -7,6 +7,7 @@ const initialState = {
     totalMeals: 0,
     totalCategories: 0,
   },
+  users: []
 };
 
 const adminSlice = createSlice({
@@ -16,8 +17,11 @@ const adminSlice = createSlice({
     setAdminStats: (state, action) => {
       state.stats = action.payload;
     },
+    setUsers: (state, action) => {
+      state.users = action.payload;
+    }
   },
 });
 
-export const { setAdminStats } = adminSlice.actions;
+export const { setAdminStats, setUsers } = adminSlice.actions;
 export default adminSlice.reducer;

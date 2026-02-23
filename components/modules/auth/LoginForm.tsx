@@ -45,7 +45,7 @@ export function LoginForm() {
       try {
         const { data, error } = await login(value);
         if (error) {
-          toast.error(error?.message, { id: toastId });
+          toast.error(error || "Unauthenticated or inactive user", { id: toastId });
           return;
         }
         
@@ -60,7 +60,7 @@ export function LoginForm() {
 
         toast.success("Logged in successfully.", { id: toastId });
       } catch (error: any) {
-        toast.error(error?.message || "Something went wrong", { id: toastId });
+        toast.error(error || "Unauthenticated or inactive user", { id: toastId });
       }
     },
   });
