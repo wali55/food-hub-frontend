@@ -20,18 +20,21 @@ export const getProviderMeals = async () => {
 
 export const createMeal = async (meal: CreateMeal) => {
     const result = await mealService.createMeal(meal);
+    revalidateTag("meals", "max");
     revalidateTag("provider-meals", "max");
     return result;
 }
 
 export const updateMeal = async (meal: UpdateMeal, mealId: string) => {
     const result = await mealService.updateMeal(meal, mealId);
+    revalidateTag("meals", "max");
     revalidateTag("provider-meals", "max");
     return result;
 }
 
 export const deleteMeal = async (mealId: string) => {
     const result = await mealService.deleteMeal(mealId);
+    revalidateTag("meals", "max");
     revalidateTag("provider-meals", "max");
     return result;
 }
