@@ -48,14 +48,10 @@ const PaymentView = () => {
       throw new Error(typeof error === "string" ? error : error?.message);
     }
 
-    // Backend returns { localOrder, paypalOrder }
-    // PayPal SDK needs the paypalOrder.id
-    console.log("paypal order id************", data.paypalOrder.id);
     return data.paypalOrder.id;
   };
 
   const onApprovePaypal = async (data: any) => {
-    console.log("paypal order id************", data.orderID);
     const toastId = toast.loading("Capturing payment...");
 
     const { data: captureData, error } = await capturePayPalOrderAction(data.orderID);
