@@ -1,10 +1,9 @@
 "use client";
 
-import { createOrder } from "@/actions/order.action";
 import { Button } from "@/components/ui/button";
 import { FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
-import { clearCart, setDeliveryAddress, setReviewDialogOpen } from "@/features/cart/cartSlice";
+import { setDeliveryAddress } from "@/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,25 +21,12 @@ const Checkout = () => {
     dispatch(setDeliveryAddress(address));
   }, [address]);
 
-  const handlePlaceOrder = async () => {
-    const toastId = toast.loading("Creating order...");
-    const payload = {
-      mealItems: mealItems.map((mealItem) => ({
-        mealId: mealItem.mealId,
-        quantity: mealItem.quantity,
-      })),
-      deliveryAddress,
-    };
-    const { data, error } = await createOrder(payload);
-
-    if (error) {
-      toast.error(error?.message || "Error occur when creating an order!", { id: toastId });
+  const handleProceedToPayment = () => {
+    if (!deliveryAddress) {
+      toast.error("Please enter a delivery address.");
       return;
     }
-    dispatch(clearCart());
-    router.push("/dashboard/review");
-    dispatch(setReviewDialogOpen(true));
-    toast.success("Order created successfully.", { id: toastId });
+    router.push("/dashboard/payment");
   };
 
   if (mealItems?.length === 0) {
@@ -57,8 +43,8 @@ const Checkout = () => {
           <Textarea id="address" onChange={(e) => setAddress(e.target.value)} />
         </FieldGroup>
       </form>
-      <Button className="bg-[#FF5322]" onClick={handlePlaceOrder}>
-        Place order
+      <Button className="bg-[#FF5322]" onClick={handleProceedToPayment}>
+        Proceed to Payment
       </Button>
     </div>
   );

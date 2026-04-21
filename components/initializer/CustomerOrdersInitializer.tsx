@@ -11,6 +11,7 @@ export type CustomerOrder = {
   totalPrice: string | number;
   deliveryAddress: string;
   userId: string;
+  paymentStatus: string;
   createdAt: string;
   updatedAt: string;
 };

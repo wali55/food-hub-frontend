@@ -1,6 +1,5 @@
 import { getProviderOrders } from "@/actions/order.action"
 import ProviderOrdersInitializer from "@/components/initializer/ProviderOrdersInitializer";
-import ProviderMeals from "@/components/modules/provider-page/ProviderMeals";
 import ProviderOrders from "@/components/modules/provider-page/ProviderOrders";
 
 const OrdersPage = async () => {

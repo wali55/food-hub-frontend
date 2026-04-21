@@ -11,7 +11,6 @@ import {
 import { useAppSelector } from "@/hooks";
 import { ProviderOrder } from "@/components/initializer/ProviderOrdersInitializer";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import CancelOrderStatusAlert from "./CancelOrderStatusAlert";
 import ChangeOrderStatusAlert from "./ChangeOrderStatusAlert";
 
@@ -35,9 +34,10 @@ const ProviderOrders = () => {
       <TableHeader>
         <TableRow>
           <TableHead className="text-[#FF5322]">Created</TableHead>
-          <TableHead className="text-[#FF5322]">Status</TableHead>
+          <TableHead className="text-[#FF5322]">Order Status</TableHead>
           <TableHead className="text-[#FF5322]">Delivery Type</TableHead>
           <TableHead className="text-[#FF5322]">Delivery Address</TableHead>
+          <TableHead className="text-[#FF5322]">Payment Status</TableHead>
           <TableHead className="text-[#FF5322]">Total Price</TableHead>
           <TableHead className="text-[#FF5322]">Action</TableHead>
         </TableRow>
@@ -56,6 +56,12 @@ const ProviderOrders = () => {
               </Badge>
               <TableCell>{order.deliveryType}</TableCell>
               <TableCell>{order.deliveryAddress}</TableCell>
+              <Badge
+                asChild
+                className={`text-[9px] ${order.paymentStatus === "COMPLETED" ? "bg-green-500" : order.paymentStatus === "PENDING" ? "bg-orange-500" : "bg-red-500"}`}
+              >
+                <TableCell>{order.paymentStatus}</TableCell>
+              </Badge>
               <TableCell>৳{order.totalPrice}</TableCell>
               <TableCell className="flex gap-2">
                 {(order.status !== "CANCELLED" && order.status !== "DELIVERED") && <ChangeOrderStatusAlert status={passStatus(order.status)} orderId={order.id} />}
